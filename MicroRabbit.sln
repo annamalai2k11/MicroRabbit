@@ -15,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroRabbit.Domain.Core", "MicroRabbit.Domain.Core\MicroRabbit.Domain.Core.csproj", "{FF0C61AE-9A99-478A-8861-D325923B1177}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroRabbit.Infra.Bus", "MicroRabbit.Infra.Bus\MicroRabbit.Infra.Bus.csproj", "{1E33AF44-CC86-41BC-BFFE-10180A50D06A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroRabbit.Infra.Bus", "MicroRabbit.Infra.Bus\MicroRabbit.Infra.Bus.csproj", "{1E33AF44-CC86-41BC-BFFE-10180A50D06A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroRabbit.Infra.Ioc", "MicroRabbit.Infra.Ioc\MicroRabbit.Infra.Ioc.csproj", "{574F614A-DC22-4DAE-9B77-DA64E8CBD284}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{1E33AF44-CC86-41BC-BFFE-10180A50D06A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E33AF44-CC86-41BC-BFFE-10180A50D06A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E33AF44-CC86-41BC-BFFE-10180A50D06A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{574F614A-DC22-4DAE-9B77-DA64E8CBD284}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{574F614A-DC22-4DAE-9B77-DA64E8CBD284}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{574F614A-DC22-4DAE-9B77-DA64E8CBD284}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{574F614A-DC22-4DAE-9B77-DA64E8CBD284}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,6 +44,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{FF0C61AE-9A99-478A-8861-D325923B1177} = {68347174-86AB-4CA3-80E5-27090C469C45}
 		{1E33AF44-CC86-41BC-BFFE-10180A50D06A} = {FBC42A52-A398-450D-8B39-19D9AEFA84D6}
+		{574F614A-DC22-4DAE-9B77-DA64E8CBD284} = {D40D4472-6881-43E1-815C-1263FDB81A78}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D45492CC-F224-4877-B670-EAB6C97D5AEE}
