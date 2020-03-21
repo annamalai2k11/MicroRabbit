@@ -3,8 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using MicroRabbit.Domain.Core.Bus;
+using MicroRabbit.Infra.Bus;
 using MicroRabbit.Infra.Ioc;
+using MicroRabbit.Transfer.Application.Interfaces;
+using MicroRabbit.Transfer.Application.Services;
 using MicroRabbit.Transfer.Data.Context;
+using MicroRabbit.Transfer.Data.Repository;
+using MicroRabbit.Transfer.Domain.EventHandlers;
+using MicroRabbit.Transfer.Domain.Events;
+using MicroRabbit.Transfer.Domain.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -35,13 +43,25 @@ namespace MicroRabbit.Transfer.API
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Transfer Microservice", Version = "v1" });
             });
-            //RegisterServices(services);
+            RegisterServices(services);
         }
 
-        //private void RegisterServices(IServiceCollection services)
-        //{
-        //    DependencyContainer.RegisterService(services);
-        //}
+        private void RegisterServices(IServiceCollection services)
+        {
+            //DependencyContainer.RegisterService(services);
+            //Domain Bus
+            services.AddTransient<IEventBus, RabbitMQBus>();
+
+            //Domain Events
+            services.AddTransient<IEventHandler<TransferCreatedEvent>, TransferEventHandler>();
+
+            //Application Services
+            services.AddTransient<ITransferService, TransferService>();
+
+            //Data
+            services.AddTransient<ITransferRepository, TransferRepository>();
+            services.AddTransient<TransferDbContext>();
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -64,6 +84,14 @@ namespace MicroRabbit.Transfer.API
             {
                 endpoints.MapControllers();
             });
+
+            ConfigureEventBus(app);
+        }
+
+        private static void ConfigureEventBus(IApplicationBuilder app)
+        {
+            var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
+            eventBus.Subscribe<TransferCreatedEvent, TransferEventHandler>();
         }
     }
 }
