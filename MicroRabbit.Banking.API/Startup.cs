@@ -51,7 +51,12 @@ namespace MicroRabbit.Banking.API
         {
             //DependencyContainer.RegisterService(services);
             //Domain Bus
-            services.AddTransient<IEventBus, RabbitMQBus>();
+            //services.AddTransient<IEventBus, RabbitMQBus>();
+            services.AddSingleton<IEventBus, RabbitMQBus>(sp =>
+            {
+                var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
+                return new RabbitMQBus(sp.GetService<IMediator>(), scopeFactory);
+            });
 
             //Domain Banking Commands
             services.AddTransient<IRequestHandler<CreateTransferCommand, bool>, TransferCommandHandler>();
